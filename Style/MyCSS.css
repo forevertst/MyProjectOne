@@ -1,0 +1,11 @@
+﻿body {
+}
+
+.a {
+    color: #3388FF;
+    text-decoration: underline;
+}
+
+    .a:hover {
+        cursor: pointer;
+    }

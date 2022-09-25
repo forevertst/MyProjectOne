@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>画线</title>
+    <link rel="stylesheet" href="Style/MyCSS.css"/> 
+    <script type="text/javascript" src="Scripts/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="Scripts/draw.js?v=3"></script>
+    
+</head>
+<body>
+       <div >
+            <img id='picSource' src="" style="display: none" />
+        
+            <div style="text-align: center">
+                <canvas id='canvas_draw' width='' height=''></canvas>
+            </div>
+            <div id='add' class="a" style="text-align: center">上传图片</div>
+            <div id='clear' class="a" style="text-align: center">清除笔迹</div>
+            <div id='del' class="a" style="text-align: center">删除图片</div>
+            <div id='display' class="a" style="text-align: center">显示照片</div>
+            <input id='idcardFront' type='file' accept='image/jpeg, image/jpg, image/png' style='display: none;' />
+        </div>
+        <img id='disImg' src="" alt="显示照片处" style="" />
+
+  
+</body>
+</html>
