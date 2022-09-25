@@ -7,6 +7,7 @@ $(function () {
     BindClick();
     BindChange();
 });
+
 function BindClick() {
     $("#save").click(function () {
 
@@ -22,9 +23,8 @@ function BindClick() {
             if (i == 0) {
                 str = value;
                 str += ";";
-                
-            }
-            else {
+
+            } else {
                 str += value;
                 str += ";";
             }
@@ -39,7 +39,7 @@ function BindClick() {
         $.ajax({
             type: "GET",
             async: false,
-            url: '/ASHX/WebService.ashx?'+data,
+            url: '/ASHX/WebService.ashx?' + data,
             success: function (result) {
                 alert(result);
             },
@@ -57,11 +57,11 @@ function BindClick() {
         var test = new Object();
         test.requestId = "123";
         test.debriefId = "abc";
-        var testlist=new Array();
-        testlist[0]=test;
+        var testlist = new Array();
+        testlist[0] = test;
         a.jslist = testlist;
         //
- 
+
         var parms = jQuery.param(a);
 
         var str = Math.random();
@@ -78,7 +78,7 @@ function BindClick() {
                 for (var i = 0; i < list.length; i++) {
                     if (list[i] == "x") {
                         list[i] = "";
-                    } 
+                    }
                     $(tds).eq(i).find("input").val(list[i]);
                 }
             },
@@ -94,13 +94,13 @@ function BindClick() {
         for (var i = 0; i < 9; i++) {
             for (var j = 0; j < 9; j++) {
                 $("table").find("tr").eq(i).find("td").eq(j).find('input').val("");
-                $("table").find("tr").eq(i).find("td").eq(j).find('input').css('color','black');
+                $("table").find("tr").eq(i).find("td").eq(j).find('input').css('color', 'black');
             }
         }
         $("#mes").html("");
         $(".choose").remove();
         $(".mark").remove();
-        InitGame($('#a').val(),$('#b').val());
+        InitGame($('#a').val(), $('#b').val());
     });
 
     $(".find").click(function () {
@@ -110,9 +110,8 @@ function BindClick() {
                 var color = $("table").find("tr").eq(i).find("td").eq(j).find('input').css('color');
                 //alert(color);
                 if (color == 'rgb(255, 165, 0)') {
-                    
-                }
-                else {
+
+                } else {
                     $("table").find("tr").eq(i).find("td").eq(j).find('input').css('color', 'black');
 
                     var compare = $("table").find("tr").eq(i).find("td").eq(j).find('input').val();
@@ -131,19 +130,18 @@ function BindClick() {
     }
 
     $("input").not(".No").mousedown(function (e) {
-        var x = e.clientX;
+        var x = e.clientX;//
         var y = e.clientY;
         T = this;
         if (e.button == 2) {
-           Apend2(x, y);
-        }
-        else if (e.button == 0) {
+            Apend2(x, y);
+        } else if (e.button == 0) {
             Apend(x, y);
         }
         //alert(e.button);
     })
 
-  
+
     //document.onmouseup = function (e) {
     //    if (e.button == 2) {
     //        var x = e.clientX;
@@ -153,24 +151,24 @@ function BindClick() {
     //    }
     //}
 }
+
 function BindChange() {
-    $("input").not(".No").change(function () { 
+    $("input").not(".No").change(function () {
         if (Check(this)) {
             $(this).css("color", "orange");
             return;
-        }
-        else {
+        } else {
             $(this).css("color", "black");
             if ($(this).val() == thisNumber) {
                 $(this).css("color", "red");
-            }
-            else {
+            } else {
                 $(this).css("color", "black");
             }
         }
-        CheckWin();    
-    });  
+        CheckWin();
+    });
 }
+
 function CheckWin() {
     var winFlag = true;
     for (var i = 0; i < 9; i++) {
@@ -189,26 +187,28 @@ function CheckWin() {
         $('#mes').html("Well Played!");
     }
 }
+
 function Apend(x, y) {
-    var str = "<table style='width:80px;table-layout:fixed;'>";
+    var str = "<table style='width:80px;table-layout:fixed;height: 150px'>";
     for (var i = 0; i < 9; i++) {
         if (i % 3 == 0) {
             str = str + "<tr style='text-align:center'>";
         }
         str = str + "<td style='width:10px;height:10px;border:pink 1px solid;background-color:#cccccc;' onclick='Choose(" + (i + 1) + ")'>" + (i + 1) + "</td>";
-        if ((i-2) % 3 == 0) {
+        if ((i - 2) % 3 == 0) {
             str = str + "</tr>";
         }
     }
     str = str + "<tr><td colspan='3' style='text-align:center;width:100%;height:10px;border:pink 1px solid;background-color:#cccccc;' onClick='Clear()'>清除</tr>";
     str += "</table>";
-    var ap = "<div class='choose' style='position: absolute; left:"+(x-5)+"px; top:"+(y-5) +"px; \'>"+str+"</div>";
+    var ap = "<div class='choose' style='position: absolute; left:" + (x - 40) + "px; top:" + (y - 40) + "px; \'>" + str + "</div>";
     $(document.body).append(ap);
 
     $(".choose").mouseleave(function () {
         $(".choose").remove();
     });
 }
+
 function Clear() {
     var This = T;
     $(This).val("");
@@ -217,47 +217,48 @@ function Clear() {
     T = "";
 
 }
+
 function Apend2(x, y) {
-    var str = "<table  style='width:80px;table-layout:fixed;'>";
+    var str = "<table  style='width:80px;table-layout:fixed;height: 150px'>";
     for (var i = 0; i < 9; i++) {
         if (i % 3 == 0) {
             str = str + "<tr style='text-align:center'>";
         }
-        str = str + "<td style='width:10px;height:10px;border:pink 1px solid;background-color:#cccccc;' onclick='Choose2(" +x+","+y+","+ (i + 1) + ")'>" + (i + 1) + "</td>";
+        str = str + "<td style='width:10px;height:10px;border:pink 1px solid;background-color:#cccccc;' onclick='Choose2(" + x + "," + y + "," + (i + 1) + ")'>" + (i + 1) + "</td>";
         if ((i - 2) % 3 == 0) {
             str = str + "</tr>";
         }
     }
     str += "</table>";
-    var ap = "<div class='choose' style='position: absolute; left:" + (x - 5) + "px; top:" + (y - 5) + "px; \'>" + str + "</div>";
+    var ap = "<div class='choose' style='position: absolute; left:" + (x - 40) + "px; top:" + (y - 40) + "px; \'>" + str + "</div>";
     $(document.body).append(ap);
 
     $(".choose").mouseleave(function () {
         $(".choose").remove();
     });
 }
+
 function Choose(x) {
     var This = T;
     $(This).val(x);
     $(".choose").remove();
     T = "";
-   
+
     if (Check(This)) {
         $(This).css("color", "orange");
-    }
-    else {
+    } else {
         $(This).css("color", "black");
         if (x == thisNumber) {
             $(This).css("color", "red");
-        }
-        else {
+        } else {
             $(This).css("color", "black");
         }
     }
     CheckWin();
 }
-function Choose2(x,y,val) {
-     //alert(x);
+
+function Choose2(x, y, val) {
+    //alert(x);
     //onclick='Del()'
     var ap = "<div  class='mark' style='font-size:3px; position: absolute; left:" + (x) + "px; top:" + (y) + "px; \'>" + val + "</div>";
     $(document.body).append(ap);
@@ -268,10 +269,12 @@ function Choose2(x,y,val) {
         $(this).remove();
     });
 }
+
 function InitStyle() {
     var tdWidth = $("input").eq(0).width();
     $("input").css("height", tdWidth);
     var trs = $("#table").find("tr");
+
     $(trs).each(function () {
         var tds = $(this).find("td");
         $(tds).each(function () {
@@ -299,7 +302,8 @@ function InitStyle() {
     });
 
 }
-function InitGame(a,b) {
+
+function InitGame(a, b) {
 
     //FillRegular();
     //InitFirst();
@@ -309,6 +313,7 @@ function InitGame(a,b) {
     AcrossLine(b);
     Blank(a);
 }
+
 function FillRegular() {
     var tds = $("#table").find("tr").eq(0).find("td");
     var x = 1;
@@ -317,6 +322,7 @@ function FillRegular() {
         x++;
     });
 }
+
 function FillRegular2() {
     var tds = $("#table").find("tr").eq(0).find("td");
     var x = 1;
@@ -326,6 +332,7 @@ function FillRegular2() {
     });
     DoChangeCol(100);
 }
+
 function Blank(input) {
     var x = input;
     //alert(x);
@@ -335,9 +342,10 @@ function Blank(input) {
 
         $("table").find("tr").eq(a).find("td").eq(b).find('input').val("");
     }
-    
+
 
 }
+
 function AcrossLine(input) {
     var x = input;
     var i = 1;
@@ -347,9 +355,10 @@ function AcrossLine(input) {
         DoChangeCol();
     }
 }
+
 function DoChangeOne() {
     var x = Random();
-    while (x == 2 || x==5 || x==8) {
+    while (x == 2 || x == 5 || x == 8) {
         x = Random();
     }
     var tr1 = $("table").find("tr").eq(x);
@@ -364,15 +373,16 @@ function DoChangeOne() {
     }
 
     for (var i = 0; i < 9; i++) {
-            var temp;
-            var a = $("table").find("tr").eq(i).find("td").eq(x).find('input').val();
-            var b = $("table").find("tr").eq(i).find("td").eq(x+1).find('input').val();
-            temp = a;
-            $("table").find("tr").eq(i).find("td").eq(x).find('input').val(b);
-            $("table").find("tr").eq(i).find("td").eq(x + 1).find('input').val(temp);
-  
+        var temp;
+        var a = $("table").find("tr").eq(i).find("td").eq(x).find('input').val();
+        var b = $("table").find("tr").eq(i).find("td").eq(x + 1).find('input').val();
+        temp = a;
+        $("table").find("tr").eq(i).find("td").eq(x).find('input').val(b);
+        $("table").find("tr").eq(i).find("td").eq(x + 1).find('input').val(temp);
+
     }
 }
+
 function DoChangeRow() {
     var x = Random();
     while (x == 2 || x == 5 || x == 8) {
@@ -389,13 +399,13 @@ function DoChangeRow() {
         $(tr2).find("td").eq(i).find('input').val(temp);
     }
 }
+
 function DoChangeCol(input) {
     var flag = false;
     var time;
     if (input == null) {
         input = 1;
-    }
-    else {
+    } else {
         flag = true;
     }
     for (var m = 0; m < input; m++) {
@@ -408,8 +418,7 @@ function DoChangeCol(input) {
         if (!flag) {
             y = x + 1;
             time = 9;
-        }
-        else {
+        } else {
             time = 1;
             y = Random();
         }
@@ -427,8 +436,6 @@ function DoChangeCol(input) {
     }
 }
 
- 
-   
 
 function InitFirst() {
     var trs = $("#table").find("tr");
@@ -453,7 +460,7 @@ function InitFirst() {
                 if (times > 1000) {
                     return;
                 }
-                
+
                 var x = $(This).val();
                 $(This).val(parseInt(x) + 1);
                 if ($(This).val() > 9)
@@ -469,16 +476,17 @@ function RealInitFirst() {
     FillRegular2();
     var a = [];
     for (var i = 0; i < 9; i++) {
-           a[i]= $("table").find("tr").eq(0).find("td").eq(i).find('input').val();
+        a[i] = $("table").find("tr").eq(0).find("td").eq(i).find('input').val();
     }
 
     for (var i = 1; i < 9; i++) {
         for (var j = 0; j < 9; j++) {
-            var val=$("table").find("tr").eq(i).find("td").eq(j).find('input').val();
-            $("table").find("tr").eq(i).find("td").eq(j).find('input').val(a[val-1]);
+            var val = $("table").find("tr").eq(i).find("td").eq(j).find('input').val();
+            $("table").find("tr").eq(i).find("td").eq(j).find('input').val(a[val - 1]);
         }
     }
 }
+
 function Check(This) {
     var Flag = 1;
     var value = $(This).val();
